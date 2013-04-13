@@ -12,38 +12,37 @@ module Middleman
 
 
         app.after_configuration do
-          puts "===Building emblem templates===="
+          
+          set :emblem_ext, "emblem" if emblem_ext.nil?
+          set :emblem_dir, "emblem_templates" if emblem_ext.nil?
 
-
-
-          template_dir = File.join(build_dir, "app")
           
 
 
 
-          ::Sprockets.register_engine ".haml", Middleman::Emblem::Template
+
+
+          ::Sprockets.register_engine ".#{emblem_ext}", Middleman::Emblem::Template
           spenv = ::Sprockets::Environment.new(root)
-          spenv.append_path("#{root}/source/app/templates_haml");
+          spenv.append_path("#{source_dir}/#{emblem_dir}");
 
           #truncate output file
           File.open("#{source_dir}/app/templates.js", 'w') {|f| f.write("")}
 
-
-          Dir["#{root}/source/app/templates_haml/**/*.haml"].each do |f|
+          c = 0
+          Dir["#{source_dir}/#{emblem_dir}/**/*.#{emblem_ext}"].each do |f|
             ignore sitemap.file_to_path(f)
-            local_name = f.gsub("#{root}/source/app/templates_haml/", "");
+            local_name = f.gsub("#{source_dir}/#{emblem_dir}/", "");
             template = spenv[local_name].to_s
-            
-
-
-            basename = local_name.gsub(".haml", "")
-            File.open("#{root}/source/app/templates.js", 'a') {|f| f.write(template + "\r\n") }
-            
+            puts "   \e[1m\e[33m[emblem]\e[22m compiling \e[0m #{local_name}"
 
 
 
+            basename = local_name.gsub(".#{emblem_ext}", "")
+            File.open("#{source_dir}/app/templates.js", 'a') {|f| f.write(template + "\r\n") }
+            c += 1
           end
-
+          puts "   \e[1m\e[33m[emblem]\e[22m compiled \e[1m\e[0m#{c} \e[22m\e[33mtemplates to \e[1m\e[0msource/app/templates.js\e[22m"
 
         end
 

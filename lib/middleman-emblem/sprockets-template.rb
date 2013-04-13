@@ -1,52 +1,30 @@
 require 'sprockets'
 require 'sprockets/engines'
 require 'barber-emblem'
-require "#{File.dirname(__FILE__)}/sprockets-old"
+require 'barber'
+
 
 module Middleman
   module Emblem
-    class Template < Ember::Handlebars::Template
-
+    class Template < Tilt::Template
+      def self.default_mime_type
+        'application/javascript'
+      end
+      def prepare; end
       def evaluate(scope, locals, &block)
         target = template_target(scope)
-
-
         template = data
-
-        if true
-          if false
-            template = precompile_emblem(template)
-          else
-            template = precompile_ember_emblem(template)
-          end
-        else
-          if raw
-            template = compile_emblem(data)
-          else
-            template = compile_ember_emblem(template)
-          end
-        end
-
+        template = precompile_ember_emblem(template)
         "#{target} = #{template}\n"
       end
 
       private
 
-      def raw?(scope)
-        scope.pathname.to_s =~ /\.raw\.(emblem)/
+
+      def template_target(scope)
+        "Ember.TEMPLATES[#{scope.logical_path.inspect}]"
       end
 
-      def compile_emblem(string)
-        "Handlebars.compile(#{indent(string).inspect});"
-      end
-
-      def precompile_emblem(string)
-        Barber::Emblem::FilePrecompiler.call(string)
-      end
-
-      def compile_ember_emblem(string)
-        "Emblem.compile(Ember.Handlebars, #{indent(string).inspect});"
-      end
 
       def precompile_ember_emblem(string)
         Barber::Emblem::EmberFilePrecompiler.call(string)
