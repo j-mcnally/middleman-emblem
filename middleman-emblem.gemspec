@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["justin@kohactive.com"]
   gem.description   = "Emblem support for middleman"
   gem.summary       = "Uses emblem butcher."
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/j-mcnally/middleman-emblem"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
