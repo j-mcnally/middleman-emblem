@@ -1,6 +1,12 @@
 # Middleman::Emblem
 
-TODO: Write a gem description
+A simple plugin to support emblem with Middleman
+
+Inspired by https://github.com/GutenYe/middleman-ember-template
+
+A great template but we wanted to add haml style support for ember templates.
+
+Built around the Emblem JS project: https://github.com/machty/emblem.js
 
 ## Installation
 
@@ -18,7 +24,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+add `activate :emblem` to config.rb
 
 ## Contributing
 
