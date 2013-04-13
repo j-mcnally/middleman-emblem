@@ -26,6 +26,18 @@ Or install it yourself as:
 
 add `activate :emblem` to config.rb
 
+## Configuration
+
+by default
+    
+    set :emblem_dir, "emblem_templates"
+    set :emblem_ext, "emblem"
+
+but this can be changed in config.rb to something like
+
+    set :emblem_dir, "templates_haml"
+    set :emblem_ext, "haml"
+
 ## Contributing
 
 1. Fork it
