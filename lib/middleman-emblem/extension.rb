@@ -1,5 +1,5 @@
 require "barber-emblem"
-require_relative "sprockets-template"
+require "middleman-emblem/sprockets-template"
 
 module Middleman
   module Emblem
@@ -15,6 +15,7 @@ module Middleman
         app.after_configuration do
           @@template_root    = options[:emblem_dir] if options.has_key?(:emblem_dir)
           sprocket_extension = options[:emblem_ext] if options.has_key?(:emblem_ext)
+          ignore "#{js_dir}/#{@@template_root}*"
           ::Sprockets.register_engine ".#{sprocket_extension}", Middleman::Emblem::Template
         end
       end  
