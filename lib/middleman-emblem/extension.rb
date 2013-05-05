@@ -1,51 +1,22 @@
-
-
+require "barber-emblem"
+require_relative "sprockets-template"
 
 module Middleman
   module Emblem
     class << self
+      @@template_root = "templates"
+
+      def template_root
+        @@template_root
+      end
+
       def registered(app, options={})
-        require "barber-emblem"
-        require "#{File.dirname(__FILE__)}/sprockets-template"
-
-
-
-
+        sprocket_extension = "emblem"
         app.after_configuration do
-          
-          set :emblem_ext, "emblem" if emblem_ext.nil?
-          set :emblem_dir, "emblem_templates" if emblem_ext.nil?
-
-          
-
-
-
-
-
-          ::Sprockets.register_engine ".#{emblem_ext}", Middleman::Emblem::Template
-          spenv = ::Sprockets::Environment.new(root)
-          spenv.append_path("#{source_dir}/#{emblem_dir}");
-
-          #truncate output file
-          File.open("#{source_dir}/app/templates.js", 'w') {|f| f.write("")}
-
-          c = 0
-          Dir["#{source_dir}/#{emblem_dir}/**/*.#{emblem_ext}"].each do |f|
-            ignore sitemap.file_to_path(f)
-            local_name = f.gsub("#{source_dir}/#{emblem_dir}/", "");
-            template = spenv[local_name].to_s
-            puts "   \e[1m\e[33m[emblem]\e[22m compiling \e[0m #{local_name}"
-
-
-
-            basename = local_name.gsub(".#{emblem_ext}", "")
-            File.open("#{source_dir}/app/templates.js", 'a') {|f| f.write(template + "\r\n") }
-            c += 1
-          end
-          puts "   \e[1m\e[33m[emblem]\e[22m compiled \e[1m\e[0m#{c} \e[22m\e[33mtemplates to \e[1m\e[0msource/app/templates.js\e[22m"
-
+          @@template_root    = options[:emblem_dir] if options.has_key?(:emblem_dir)
+          sprocket_extension = options[:emblem_ext] if options.has_key?(:emblem_ext)
+          ::Sprockets.register_engine ".#{sprocket_extension}", Middleman::Emblem::Template
         end
-
       end  
       alias :included :registered
     end
