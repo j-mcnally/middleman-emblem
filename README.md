@@ -4,7 +4,7 @@ A simple plugin to support emblem with Middleman
 
 Inspired by https://github.com/GutenYe/middleman-ember-template
 
-A great template but we wanted to add haml style support for ember templates.
+A great template but we wanted to add slim style support for ember templates.
 
 Built around the Emblem JS project: https://github.com/machty/emblem.js
 
@@ -28,11 +28,15 @@ add `activate :emblem` to config.rb
 
 ## Configuration
 
-by default
-    activate :emblem, emblem_dir: "templates", :emblem_ext, "emblem"
+by default:
+`activate :emblem, emblem_dir: "templates", emblem_ext: "emblem", ignore: true`
 
-but this can be changed in config.rb to something like
-    activate :emblem, emblem_dir: "templates_haml", :emblem_ext, "haml"
+`ignore: true` means it will ignore the "templates" folder when building
+
+but this can be changed in config.rb to something like:
+`activate :emblem, emblem_dir: "templates_slim", emblem_ext: "slim", ignore: false`
+
+`ignore: false` means you need to *explicity ignore* the "templates" folder in your config.rb when building
 
 ## Contributing
 
