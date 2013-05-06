@@ -11,7 +11,7 @@ Built around the Emblem JS project: https://github.com/machty/emblem.js
 
 ## Full Project Generation
 
-Check out my other project (mes) which will build a full scaffold for a middleman/ember/emblem project.
+Check out my other project ([mes](https://github.com/j-mcnally/mes)) which will build a full scaffold for a middleman/ember/emblem project.
 
 
 ## Installation
