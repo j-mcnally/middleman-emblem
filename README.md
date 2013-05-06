@@ -4,9 +4,15 @@ A simple plugin to support emblem with Middleman
 
 Inspired by https://github.com/GutenYe/middleman-ember-template
 
-A great template but we wanted to add slim style support for ember templates.
+A great template but we wanted to add slim/haml style support for ember templates.
 
 Built around the Emblem JS project: https://github.com/machty/emblem.js
+
+
+## Full Project Generation
+
+Check out my other project (mes) which will build a full scaffold for a middleman/ember/emblem project.
+
 
 ## Installation
 
