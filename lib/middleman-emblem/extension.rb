@@ -14,9 +14,13 @@ module Middleman
         sprocket_extension = "emblem"
         @@template_root    = options[:emblem_dir] if options.has_key?(:emblem_dir)
         sprocket_extension = options[:emblem_ext] if options.has_key?(:emblem_ext)
+
         ::Sprockets.register_engine ".#{sprocket_extension}", Middleman::Emblem::Template
         app.after_configuration do
-          ignore "#{js_dir}/#{@@template_root}*" unless options.has_key?(:ignore) && !options[:ignore] 
+          root = [@@template_root].flatten
+          root.each do |root|
+            ignore "#{js_dir}/#{root}*" unless options.has_key?(:ignore) && !options[:ignore] 
+          end
         end
       end  
       alias :included :registered

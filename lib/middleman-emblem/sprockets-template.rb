@@ -25,7 +25,6 @@ module Middleman
 
       def template_path(path)
         root = configuration.templates_root
-
         if root.kind_of? Array
           root.each do |root|
             path.sub!(/#{Regexp.quote(root)}\//, '')
