@@ -13,14 +13,14 @@ module Middleman
       def evaluate(scope, locals, &block)
         target = template_target(scope)
         template = data
-        template = precompile_ember_emblem(template)
+        template = precompile_emblem(template)
         "#{target} = #{template}\n"
       end
 
       private
 
       def template_target(scope)
-        "Ember.TEMPLATES[#{template_path(scope.logical_path).inspect}]"
+        "#{configuration.object}[#{template_path(scope.logical_path).inspect}]"
       end
 
       def template_path(path)
@@ -43,12 +43,18 @@ module Middleman
       def configuration
         OpenStruct.new(
           templates_root: Middleman::Emblem.template_root,
-          templates_path_separator: "/"
+          templates_path_separator: "/",
+          ember: Middleman::Emblem.ember,
+          object: Middleman::Emblem.object
         )
       end
 
-      def precompile_ember_emblem(string)
-        Barber::Emblem::EmberFilePrecompiler.call(string)
+      def precompile_emblem(string)
+        if configuration.ember
+          Barber::Emblem::EmberFilePrecompiler.call(string)
+        else
+          Barber::Emblem::FilePrecompiler.call(string)
+        end
       end
     end
   end
