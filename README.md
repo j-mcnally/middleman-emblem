@@ -35,7 +35,7 @@ add `activate :emblem` to config.rb
 ## Configuration
 
 by default:
-`activate :emblem, emblem_dir: "templates", emblem_ext: "emblem", ignore: true`
+`activate :emblem, emblem_dir: "templates", emblem_ext: "emblem", ignore: true, ember:true, object: "Ember.TEMPLATES"`
 
 `ignore: true` means it will ignore the "templates" folder when building
 
@@ -43,6 +43,9 @@ but this can be changed in config.rb to something like:
 `activate :emblem, emblem_dir: "templates_slim", emblem_ext: "slim", ignore: false`
 
 `ignore: false` means you need to *explicity ignore* the "templates" folder in your config.rb when building
+
+To use without Ember, set `ember: false` and choose an object in which to store precompiled templates, e.g. `object: "App.Templates"`
+
 
 ## Contributing
 
