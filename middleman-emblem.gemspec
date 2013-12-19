@@ -16,6 +16,6 @@ Gem::Specification.new do |gem|
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
-  gem.add_runtime_dependency("barber-emblem", ["~> 0.1.0"])
-  gem.add_runtime_dependency("emblem-source", "0.2.7")
+  gem.add_runtime_dependency("barber-emblem", ">= 0.1.0")
+  gem.add_runtime_dependency("emblem-source", ">= 0.3.0")
 end
