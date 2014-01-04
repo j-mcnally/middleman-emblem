@@ -11,6 +11,7 @@ Gem::Specification.new do |gem|
   gem.description   = "Emblem support for middleman"
   gem.summary       = "Uses emblem butcher."
   gem.homepage      = "https://github.com/j-mcnally/middleman-emblem"
+  gem.license       = "MIT"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
