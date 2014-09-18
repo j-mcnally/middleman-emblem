@@ -1,5 +1,3 @@
-# The project is dead
-## Use Ember-CLI
 
 
 # Middleman::Emblem
