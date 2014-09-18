@@ -1,3 +1,7 @@
+# The project is dead
+## Use Ember-CLI
+
+
 # Middleman::Emblem
 
 A simple plugin to support emblem with Middleman
